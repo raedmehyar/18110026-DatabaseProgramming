@@ -1,37 +1,72 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct element {
+struct element
+{
     int value;
     struct element *leftelement;
     struct element *rightelement;
-    
-}*root;
 
-void search(int value){
-    
-struct element *currPos=root;
-printf("start..");
-while (currPos->value!=value) {
-    if (currPos!=NULL) {
-        printf("%d", currPos->value);
-    if (value>currPos->value)currPos=currPos->rightelement;
-    else currPos=currPos->leftelement;
-    if (currPos==NULL)printf("notfound");
+} * root;
+
+void search(int value)
+{
+
+    struct element *currPos = root;
+    printf("visiting elements: ");
+    while (currPos->value != value)
+    {
+        if (currPos != NULL)
+        {
+            printf("%d", currPos->value);
+            if (currPos->value > value)
+                currPos = currPos->leftelement;
+            else
+                currPos = currPos->rightelement;
+            if (currPos == NULL)
+                printf("notfound");
+            return;
+        }
     }
 }
+
+void insert(int value)
+{
+    struct element *tempelement = (struct element *)malloc(sizeof(struct element));
+    struct element *currPos;
+    struct element *parent;
+
+    tempelement->value = value;
+    tempelement->rightelement = NULL;
+    tempelement->leftelement = NULL;
+
+    if (root == NULL)
+    {
+        root = tempelement;
+    }
+    else
+    {
+        currPos = root;
+        parent = NULL;
+
+        while (1)
+        {
+            parent = currPos;
+            if (value < parent->value)
+            {
+                currPos = currPos->leftelement;
+                if (currPos == NULL)
+                {
+                    parent->rightelement = tempelement;
+                    return;
+                }
+            }
+        }
+    }
 }
 
-    void insert(int value) {
-struct element *tempelement = (struct element*) malloc(sizeof(struct element));
-struct element *currPos;
-struct element *parent;
-tempelement->value=value;
-tempelement->rightelement=NULL;
-tempelement->leftelement=NULL;
-        }
-        
-int main() {
+int main()
+{
     insert(50);
     insert(30);
     insert(20);
