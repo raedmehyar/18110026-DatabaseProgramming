@@ -24,8 +24,9 @@ void search(int value)
             else
                 currPos = currPos->rightelement;
             if (currPos == NULL)
-                printf("notfound");
-            return;
+                {printf("notfound");
+                
+            return;}
         }
     }
 }
@@ -59,6 +60,14 @@ void insert(int value)
                 {
                     parent->rightelement = tempelement;
                     return;
+                }
+                else 
+                {
+                    currPos->rightelement;
+                    if(currPos == NULL){
+                        parent->rightelement = tempelement;
+                        return;
+                    }
                 }
             }
         }
